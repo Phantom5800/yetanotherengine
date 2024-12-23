@@ -5,8 +5,8 @@ root = "src"
 objs = "OBJ="
 targets = ""
 for subdir, dirs, files in os.walk(root):
+    src = subdir.replace('\\', '/')
     for file in files:
-        src = subdir.replace('\\', '/')
         output = f"$(OUT)/{file.replace('.cpp', '.o')}"
         targets += f"{output}: {src}/{file}\n"
         targets += f"\t$(CC) $(CFLAGS) $(DEBUG_FLAGS) {src}/{file} $(INCLUDE) -o {output}\n"

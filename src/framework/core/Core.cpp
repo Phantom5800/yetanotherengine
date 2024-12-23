@@ -11,10 +11,6 @@ namespace Phantom
 
     FrameworkCore::~FrameworkCore()
     {
-        for (auto rit = m_systems.rbegin(); rit != m_systems.rend(); ++rit)
-        {
-            (*rit)->Uninit();
-        }
     }
 
     void FrameworkCore::Register(System* sys)
@@ -36,5 +32,18 @@ namespace Phantom
             }
             prev = std::chrono::high_resolution_clock::now();
         }
+    }
+
+    void FrameworkCore::Shutdown()
+    {
+        for (auto rit = m_systems.rbegin(); rit != m_systems.rend(); ++rit)
+        {
+            (*rit)->Uninit();
+        }
+    }
+
+    void FrameworkCore::RequestQuit()
+    {
+        m_alive = false;
     }
 }

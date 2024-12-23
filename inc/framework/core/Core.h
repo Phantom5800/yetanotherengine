@@ -13,6 +13,8 @@ namespace Phantom
 
         void Register(System* sys);
         void RunGameLoop();
+        void Shutdown();
+        void RequestQuit();
 
     private:
         std::vector<System*> m_systems;

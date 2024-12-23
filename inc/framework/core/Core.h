@@ -1,8 +1,21 @@
 #pragma once
 
-class FrameworkCore
+#include <vector>
+#include "framework/core/System.h"
+
+namespace Phantom
 {
-public:
-    FrameworkCore();
-    ~FrameworkCore();
-};
+    class FrameworkCore
+    {
+    public:
+        FrameworkCore();
+        ~FrameworkCore();
+
+        void Register(System* sys);
+        void RunGameLoop();
+
+    private:
+        std::vector<System*> m_systems;
+        bool m_alive;
+    };
+}

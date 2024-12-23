@@ -1,24 +1,24 @@
-CC=cl.exe
-CFLAGS=/O2
-DEBUG_FLAGS=/Od
-SRC=src/*.cpp
+CC=g++.exe
+INCLUDE=-Iinc
+CFLAGS=-c
+DEBUG_FLAGS=-Wall
+SRC=src
+OUT=out
 
-OUT_DEBUG=/Fo"out/x64/debug/"
-OUT_RELEASE=/Fo"out/x64/release/"
+EXE=game.exe
 
-EXE_DEBUG=/Fe"out/x64/debug/game.exe"
-EXE_RELEASE=/Fe"out/x64/release/game.exe"
+OBJ=$(OUT)/main.o
 
-all: dirs debug
+all: debug
+debug: $(OUT)/$(EXE)
+run:
+	$(OUT)/$(EXE)
 
-dirs:
-	if not exist out mkdir out\x64\debug out\x64\release
+$(OUT)/main.o: src/main.cpp
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(SRC)/main.cpp $(INCLUDE) -o $(OUT)/main.o
 
-debug:
-	$(CC) $(DEBUG_FLAGS) $(SRC) $(OUT_DEBUG) $(EXE_DEBUG)
-
-release:
-	$(CC) $(CFLAGS) $(SRC) $(OUT_RELEASE) $(EXE_RELEASE)
+$(OUT)/$(EXE): $(OBJ)
+	$(CC) $(OBJ) $(INCLUDE) -o $(OUT)/$(EXE)
 
 clean:
-	rmdir /S /Q out
+	rm out/*

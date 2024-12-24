@@ -11,12 +11,14 @@ debug: $(OUT)/$(EXE)
 run:
 	$(OUT)/$(EXE)
 
-OBJ=$(OUT)/main.o $(OUT)/Core.o 
+OBJ=$(OUT)/main.o $(OUT)/Core.o $(OUT)/Vector4.o 
 
 $(OUT)/main.o: src/main.cpp
 	$(CC) $(CFLAGS) $(DEBUG_FLAGS) src/main.cpp $(INCLUDE) -o $(OUT)/main.o
 $(OUT)/Core.o: src/framework/core/Core.cpp
 	$(CC) $(CFLAGS) $(DEBUG_FLAGS) src/framework/core/Core.cpp $(INCLUDE) -o $(OUT)/Core.o
+$(OUT)/Vector4.o: src/framework/math/Vector4.cpp
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) src/framework/math/Vector4.cpp $(INCLUDE) -o $(OUT)/Vector4.o
 
 $(OUT)/$(EXE): $(OBJ)
 	$(CC) $(OBJ) -o $(OUT)/$(EXE)
